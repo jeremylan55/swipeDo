@@ -1,0 +1,52 @@
+
+<ion-view view-title="Todo">
+
+  <ion-header-bar align-title="left" class="bar">
+    <div>To Do</div>
+  </ion-header-bar>  
+    <div class="">
+
+    </div>
+
+  <ion-content class="padding">
+
+
+
+<!-- <ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <ion-slide ng-repeat="list in all_list">
+    <ion-list class="myList">
+        List Name:
+        {{list.name_}}
+      <ion-item id="item{{$index}}" on-drag="onItemDrag()" on-release="releaseItem() "class="myItem" ng-repeat="todo in list.list">
+        <button id="check{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></button>{{todo.text_}}
+      </ion-item>
+    </ion-list>
+  <ion-slide>
+</ion-slide-box>
+ -->
+
+
+    <ion-list class="myList">
+    <div id="item-{{$index}}" ng-repeat="todo in list track by $index" class="none">
+      <ion-item id="white-{{$index}}" on-drag="onItemDrag()" on-release="releaseItem()"class="myItem">
+        <div id="check-{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></div>{{todo.text_}}
+      </ion-item>
+      <div class="prompt">
+        <div class="checkIt">DONE</div>
+        <div class="deleteIt">DELETE</div>
+      </div>
+    </div>
+    </ion-list>
+
+
+
+  </ion-content>
+
+<div class="overlay" on-release="hideMenu()"></div>
+
+  <ion-footer-bar align-title="left" id="footer1" class="bar-assertive">
+    <input placeholder="New to do"></input>
+    <button id="plusButton" ng-click="saveNewTodo()"></button>
+  </ion-footer-bar>
+
+</ion-view>

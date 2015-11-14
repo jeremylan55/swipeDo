@@ -1,0 +1,58 @@
+
+<ion-view view-title="Todo">
+
+  <ion-header-bar align-title="left" class="bar bar-clear bar-top">
+    <div>To Do</div>
+  </ion-header-bar>  
+
+  <ion-header-bar class="bar-subheader bar">
+      <ti-segmented-control on-select="buttonClicked($index)" style="width: 300px;">
+      <ti-segmented-control-button id="1" class="button-royal" selected ng-click="segment(1)">All</ti-segmented-control-button>
+      <ti-segmented-control-button id="2" class="button-royal" ng-click="segment(2)">Ongoing</ti-segmented-control-button>
+      <ti-segmented-control-button id="3" class="button-royal" ng-click="segment(3)">Done</ti-segmented-control-button>
+    </ti-segmented-control>
+  </ion-header-bar>
+
+
+  <ion-content class="padding">
+
+
+
+<!-- <ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <ion-slide ng-repeat="list in all_list">
+    <ion-list class="myList">
+        List Name:
+        {{list.name_}}
+      <ion-item id="item{{$index}}" on-drag="onItemDrag()" on-release="releaseItem() "class="myItem" ng-repeat="todo in list.list">
+        <button id="check{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></button>{{todo.text_}}
+      </ion-item>
+    </ion-list>
+  <ion-slide>
+</ion-slide-box>
+ -->
+
+
+    <ion-list class="myList">
+    <div id="item-{{$index}}" ng-repeat="todo in list | filter :{ done: seg } track by $index" class="">
+      <ion-item id="white-{{$index}}" on-drag="onItemDrag()" on-release="releaseItem()"class="myItem">
+        <div id="check-{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></div>{{todo.text_}}
+      </ion-item>
+      <div class="prompt">
+        <div class="checkIt">DONE</div>
+        <div class="deleteIt">DELETE</div>
+      </div>
+    </div>
+    </ion-list>
+
+
+
+  </ion-content>
+
+<div class="overlay" on-release="hideMenu()"></div>
+
+  <ion-footer-bar align-title="left" id="footer1" class="bar-assertive">
+    <input placeholder="New to do"></input>
+    <button id="plusButton" ng-click="saveNewTodo()"></button>
+  </ion-footer-bar>
+
+</ion-view>

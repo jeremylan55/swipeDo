@@ -1,0 +1,303 @@
+/* Empty. Add your own CSS if you like */
+button {
+	border: none;
+}
+.bar-assertive{
+	background-color: rgba(255,255,255,0.96) !important;
+	bottom: 0px !important;
+}
+.bar-header.disable-user-behavior {
+	background-color: transparent;
+}
+.bar-top {
+	border-bottom: none !important;
+	border: none !important;
+}
+.bar-subheader {
+	border-top: none !important;
+}
+.tab-nav.tabs {
+	display: none !important;
+}
+.bar-assertive.bar.bar-footer.has-tabs {
+	border:none !important;
+}
+/*.bar-stable.bar.bar-header.disable-user-behavior{
+	display: none !important;
+}
+*/.padding.scroll-content.ionic-scroll .has-header.has-footer.has-tabs {
+	border-radius: 13px !important;
+}
+.pane {
+	background: -webkit-linear-gradient(#FF855A, #D90060) !important; /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(#FF855A, #D90060) !important; /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#FF855A, #D90060) !important; /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(#FF855A, #D90060) !important; /* Standard syntax */ 
+}
+
+#plusButton {
+	width: 12%;
+	height: 40px;
+	border-radius: 50%;
+	background: url(../img/plus_button.png) no-repeat;
+	background-size: 40px 40px;
+	background-position: center center;
+	margin: auto;
+}
+
+#plusButton:active {
+	width: 12%;
+	height: 40px;
+	border-radius: 50%;
+	background: url(../img/plus_button_activated.png) no-repeat;
+	background-size: 40px 40px;
+	background-position: center center;
+	margin: auto;
+}
+#hamburgerButton {
+	margin: 15px;
+	margin-right: -30px;
+	width: 25px;
+	height: 20px;
+	background:  url(../img/Hamburger.png) no-repeat;
+	background-size: 25px 20px;
+}
+
+#hamburgerButton:active {
+	margin: 10px;
+	margin-right: -30px;
+	width: 30px;
+	height: 24px;
+	background:  url(../img/Hamburger_activated.png) no-repeat;
+	background-size: 30px 24px;
+}
+
+.bar>div {
+	margin: auto;
+	font-family: HelveticaNeue-Thin;
+	font-size: 30px;
+	color: #fff;
+	text-align: left !important;
+}
+
+.hamburgerMenu {
+	width: 100%;
+	height: 100%;
+}
+
+.hamburgerMenu-container {
+	z-index: 30;
+	width:  180px;
+	height: 100vh;
+	background: rgba(39,39,39,1);
+	position: absolute;
+	top: 0px;
+	left: -180px;
+	overflow: auto;
+    -webkit-transition: all 0.6s; /* Safari */
+    transition: all 0.6s;
+}
+
+.hamburgerMenu-container.active {
+	z-index: 32;
+	width:  180px;
+	height: 100vh;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+    -webkit-transition: all 0.6s; /* Safari */
+    transition: all 0.6s;
+}
+.overlay {
+	visibility: hidden;
+	position: absolute;
+	z-index: 30;
+	width: 100%;
+	height: 100vh;
+	background-color: #000;
+	opacity: 0;
+    -webkit-transition: opacity 0.6s; /* Safari */
+    transition: opacity 0.6s;
+}
+
+.overlay.active {
+	visibility: visible;
+	width: 100%;
+	height: 100vh;
+	background-color: #000;
+	opacity: 0.4;
+    -webkit-transition: opacity 0.6s; /* Safari */
+    transition: opacity 0.6s;
+}
+
+.myItemHam {
+	color: #f0f0f0;
+	background: transparent !important; 
+	border: none !important;
+}
+.blur {
+	-webkit-filter: blur(5px);
+  	-moz-filter: blur(5px);
+  	-o-filter: blur(5px);
+  	-ms-filter: blur(5px);
+  	filter: blur(5px);
+    -webkit-transition: all 0.8s; /* Safari */
+    transition: all 0.8s;
+}
+
+.myItem {
+	position: relative;
+	border: none !important;
+	height: 68px;
+	max-width: 350px;
+	margin: auto;
+	border-radius: 13px;
+	margin-bottom: 13px;
+	vertical-align: middle;
+	font-family: HelveticaNeue-Thin;
+	font-size: 24px;
+	/*box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.50);*/
+}
+.prompt {
+	padding: 8px;
+	padding-top: 21px;
+	width: 350px;
+	height: 68px;
+	margin: auto;
+	margin-top: -81px;
+	border-radius: 13px;
+	margin-bottom: 13px;
+}
+.prompt>.checkIt {
+	opacity: 0.0;
+	color: #20E286;
+	font-family: HelveticaNeue-Thin;
+	font-size: 30px;
+	float: left;
+}
+.prompt>.deleteIt {
+	opacity: 0.0;
+	color: #FFFFFF;
+	font-family: HelveticaNeue-Thin;
+	font-size: 28px;
+	float: right;
+}
+.myList{
+	padding-bottom: 50px !important;
+}
+.checkBox {
+	margin-right: 22px;
+	float: left;
+	width: 35px;
+	height: 35px;
+}
+.checkBox.true {
+	background: url(../img/checked.png) no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.checkBox {
+	background: url(../img/unchecked.png) no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.addMenu-container {
+	z-index: 31;
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	padding-top: 50vh;
+	top: 0vh;
+	visibility: hidden;
+}
+.addMenu {
+	margin: auto;
+	position: relative;
+	margin-top: -64px;
+	width: 360px;
+	height: auto;
+	background: #FFFFFF;
+	box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.50);
+	border-radius: 13px;
+	padding: 10px;
+	font-family: HelveticaNeue-Thin;
+}
+.addMenu>p {
+	font-size: 36px;
+	color: #53574F;
+	width: 100%;
+	text-align: center;
+}
+.addMenu>input {
+	border-radius: 0px;
+	border: none;
+	border-bottom: solid 2px #53574F;
+	width: 100%;
+	height: 40px;
+	font-size: 26px;
+	margin-top: 30px;
+	background-color: transparent !important;
+	font-family: HelveticaNeue-Light;
+}
+
+.arrowDown {
+	margin-top: 12px;
+	margin-bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background: url(../img/arrow_down.svg) no-repeat;
+	background-position: center center;
+	background-size: auto 100%;
+}
+
+#footer1 {
+	border-color: none !important;
+	background-image: none !important;
+	background-color: #fff !important;
+}
+#footer2 {
+	z-index: 35;
+	visibility: hidden;
+	background-image: none !important;
+	border-color: none !important;
+	background-color: transparent !important;
+	box-shadow: none !important;
+	height: 80px !important;
+}
+#footer2>div {
+	text-align: center !important;
+	color: #DE125F;
+	height: 100%;
+	width: 73px;
+	background: url(../img/arrow_save.svg) no-repeat;
+	background-size: 73px 34px;
+	background-position: center 30px;
+}
+#footer2>#gradient {
+	box-shadow: 0px -11px 45px 26px rgba(0,0,0,0.6);
+	width: 100%;
+	height: 0px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+.list {
+	padding-bottom: 60px !important;
+}
+#footer1>input {
+	position: absolute;
+	left: 10px;
+	height: 90%;
+	width: 88%;
+	border: none;
+	background: transparent;
+	font-size: 25px;
+	padding-bottom: 5px;
+}
+#footer1>button {
+	position: absolute;
+	right: 10px;
+}
+
+
