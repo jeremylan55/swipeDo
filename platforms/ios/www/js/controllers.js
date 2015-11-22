@@ -1,23 +1,45 @@
 angular.module('starter.controllers', ['ti-segmented-control'])
 
 .controller('TodoCtrl', function($scope, $timeout) {
+//===========================CANVAS======================================== //
+var lc = LC.init(
+	document.getElementsByClassName('literally')[0],
+	{
+		imageURLPrefix: '/canvas',
+    	tools: [LC.tools.Pencil, LC.tools.Eraser]
+	}
+);
+//============================CANVAS======================================= //
+
 	function itemClass() {
+		this.id =0;
   		this.text_ = '';
   		this.done = false;
+  		this.drawing = '';
 	}
-	$scope.seg = false;
+	$scope.keyboardHeight = 216;
+	var canvasOn = false;
+	var colors = ['#000','#20E286', '#FF855A', '#2382EA'];
+	var currentColor = 0;
+window.addEventListener('native.keyboardshow', keyboardShowHandler);
+window.addEventListener('native.keyboardhide', keyboardHideHandler);
+
+function keyboardShowHandler(e){
+	if(!canvasOn){
+		$scope.keyboardHeight = e.keyboardHeight;
+		$('#footer1').animate({marginBottom: e.keyboardHeight + 'px'}, 300, 'swing');
+	}
+}
+function keyboardHideHandler(e){
+	$('#footer1').animate({marginBottom: ''}, 260, 'swing');
+}
+
+
+	$scope.seg = '';
 	$scope.list = new Array();
 	$(document).ready( function(){
 		pull();
-		console.log($scope.list);
 	});
-	// for( var i=0; i<15; i++) {
-	// 	newTodo = new itemClass();
-	// 	newTodo.text_ = 'post'+i;
-	// 	newTodo.done = false;
-	// 	$scope.list.push(newTodo);
-	// 	synchronize();
-	// }
 
 	function saveAll() {
 	  window.localStorage['list'] = JSON.stringify($scope.list);
@@ -35,51 +57,47 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 	function synchronize() {
 	  saveAll();
 	  pull();
-	  console.log($scope.list);
 	}
 
-
-
-  
-
-  // $('#hamburgerButton').click( function() {
-  // 	$('.hamburgerMenu-container').addClass('active');
-  // 	$('.overlay').removeClass('hide').addClass('active');
-  // });
-
-  // $('.overlay').on('tap', function(){
-  	// console.log('hey')
-  // 	$scope.hideMenu();
-  // });
-
-	// $scope.setCurrentList = function() {
-	//   $scope.list[$scope.currentList].list
-	// }
-
-	$scope.check = function(index) {
-		index = parseInt(index);
-		$('#check-'+index).toggleClass('true');
-		var newTodo = $scope.list[index];
-		if($('#check-'+index).hasClass('true'))
-			newTodo.done = true;
+	$scope.check = function() {
+		var index = event.target.id;
+		index = index.split('check-');
+		index = index[1];
+		var temp = $scope.list[index];
+		if(temp.done)
+			temp.done = false;
 		else
-			newTodo.done = false;
-		$scope.list.splice(index,1,newTodo);
+			temp.done = true;
+		$scope.list.splice(index,1,temp);
+		synchronize();
+	}
+
+	$scope.checkSlide = function(index) {
+		var temp = $scope.list[index];
+		if(temp.done)
+			temp.done = false;
+		else
+			temp.done = true;
+		$scope.list.splice(index,1,temp);
 		synchronize();
 	}
 	function removeFromList(index) {
 		$scope.list.splice(index,1);
+		for( var i=index; i<$scope.list.length; i++) {
+			var temp = $scope.list[i];
+			temp.id = i;
+			$scope.list[i] = temp;
+		}
 		synchronize();
 	}
 
+
 	$scope.onItemDrag = function() {
-		console.log(event.gesture.deltaX);
 		var id = event.target.id.split('-');
 		var item = $('#'+event.target.id);
 		if(event.gesture.deltaX < 20 && event.gesture.deltaX > -20)
 			item.css('left','0px');
 		else if(id[0] == 'white') {
-			console.log('white');
 			if(event.gesture.deltaX < 100 && event.gesture.deltaX >= 0) {
 				var fraction = event.gesture.deltaX/86;
 				item.css('left', event.gesture.deltaX+'px');
@@ -101,7 +119,6 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 			var index = event.target.id;
 			index = index.split('white-');
 			index = parseInt(index[1]);
-			console.log(index)
 			
 			var left = item.attr('style');
 			left = left.split(' ');
@@ -110,8 +127,7 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 
 			if(left >= -175) {
 				if(left >= 76) {
-					console.log('check:'+index)
-					$scope.check(index);
+					$scope.checkSlide(index);
 				}
 				item.animate({left: '0px'});
 			}
@@ -131,52 +147,7 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 		}
 	}
 
-	// $scope.showAddMenu = function() {
-	// 	$('.addMenu>input').val('');
-	// 	$('.addMenu').css('top', '0px');
-	// 	$('.addMenu-container').css('top', '0px');
-	// 	$('.addMenu-container').css('visibility', 'visible').addClass('animated slideInUp short');
-	// 	$('.overlay').addClass('active');
-	// 	$('#footer1').removeClass('animated slideInUp short');
-	// 	$('#footer1').addClass('animated slideOutDown short');
-	// 	$('#footer2').removeClass('animated slideOutDown short');
-	// 	$('#footer2').css('visibility', 'visible').addClass('animated slideInUp short');
-	// }
 
-	// $scope.onAddMenuDrag = function() {
-	// 	var top = event.gesture.deltaY;
-	// 	if(top >= 0){}
-	// 	else {}
-	// 	$('.addMenu-container').css('top', top+'px');
-	// }
-
-	// $scope.releaseAddMenu = function() {
-	// 	var top = $('.addMenu-container').attr('style').split(' ');
-	// 	top = parseFloat(top[1].split('px;'));
-	// 	var vh = $(window).height();
-	// 	vh = (vh/2)-150;
-	// 	if(top < vh) {
-	// 		$('.addMenu-container').animate({top: '0px'});
-	// 	}
-	// 	else {
-	// 		$('.addMenu-container').animate({top: '130%'},400);
-	// 		$timeout(function(){
-	// 			$scope.hideMenu();
-	// 			$scope.saveNewTodo();
-	// 		},400);
-	// 	}
-	// }
-
-	// $scope.hideMenu = function() {
-	// 	$('.addMenu').css('top', '0px');
-	// 	$('.addMenu-container').css('top', '0px');
-	// 	$('.addMenu-container').css('visibility', 'hidden').removeClass('animated slideInUp short');
-	// 	$('.overlay').removeClass('active');
-	// 	$('#footer1').removeClass('animated slideOutDown short');
-	// 	$('#footer1').addClass('animated slideInUp short');
-	// 	$('#footer2').css('visibility', 'hidden').removeClass('animated slideInUp short')
-	// 	$('#footer2').addClass('animated slideOutDown short');
-	// }
 	$('#footer1>input').focus( function(){
 		$('#footer1>input').attr('placeholder','');
 	});
@@ -185,19 +156,36 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 	});
 
 	$scope.saveNewTodo = function() {
+		$('ion-content').removeClass('blur');
+		$('ion-header-bar').removeClass('blur');
+		$('#drawButton').removeClass('filled');
+		$('#footer1').animate({height: '50px'}, 200, 'swing');
+		$('#footer1').css('padding-top', '5px');
+		$('#footer1>input').css('color', '#000');
+		$('#myCanvas').css('visibility', 'hidden');
+		$('#myCanvas>button').css('visibility', 'hidden');
+		$('#footer1').removeClass('dark');
+		canvasOn = false;
 		var text = $('#footer1>input').val();
 		if(text !='') {
 			newTodo = new itemClass();
 			newTodo.text_ = text;
-			console.log(newTodo);
+			newTodo.drawing = lc.getSVGString();
+			lc.clear();
+			newTodo.id = $scope.list.length;
 			$scope.list.push(newTodo);
+			$timeout( function(){
+				$('#item-'+newTodo.id).addClass('animated bounceIn');
+				setTimeout( function(){
+					$('#item-'+newTodo.id).removeClass()
+				},600);
+			},10);
 			$('#footer1>input').val('');
 			synchronize();
 		}
 	}
 
 	$scope.segment = function(id) {
-		console.log(id);
 		if(id == 3)
 			$scope.seg = true;
 		else if(id == 2)
@@ -206,35 +194,63 @@ angular.module('starter.controllers', ['ti-segmented-control'])
 			$scope.seg = '';
 		}
 	}
-// var deltaY =[];
-// ==============================PINNING==============================//
-
-// $('.scroll').attrchange({
-// 	trackValues: true, /* Default to false, if set to true the event object is 
-// 				updated with old and new value.*/
-// 	callback: function (event) { 
-// 		deltaY = event.newValue.split(', ');
-// 		deltaY = deltaY[1].split('px');
-// 		deltaY = deltaY[0]*-1;
-// 		var length = all[$scope.currentList].list.length
-
-// 		for(var i=0; i<length; i++) {
-// 			if(deltaY >= i*81) {
-// 				$('#item'+i).css('top',(deltaY-(81*i))+'px');
-// 			}
-// 		}
-// 	    //event    	          - event object
-// 	    //event.attributeName - Name of the attribute modified
-// 	    //event.oldValue      - Previous value of the modified attribute
-// 	    //event.newValue      - New value of the modified attribute
-// 	    //Triggered when the selected elements attribute is added/updated/removed
-// 	}        
-// });
 
 
+	// $('#footer1>input').keyup(function(event){
+	// 	if($('#footer1>input').val() == '')
+	// 		$('#footer1>#drawButton').css('visibility','hidden');
+	// 	else
+	// 		$('#footer1>#drawButton').css('visibility','visible');
+	// });
 
-// ==========================================================================================//
-//         								CONTROLLER ENDS
-// ==========================================================================================//
+	$scope.showCanvas = function() {
+		if(!canvasOn){
+			$('ion-content').addClass('blur');
+			$('ion-header-bar').addClass('blur');
+			$('#footer1').css('height','100vh');
+			$('#footer1').css('padding-top', '20px');
+			$('#footer1').addClass('dark');
+			$('#footer1>input').css('color', '#fff');
+			$('#drawButton').addClass('filled');
+			$('#myCanvas').css('visibility', 'visible');
+			$('#myCanvas>button').css('visibility', 'visible');
+			canvasOn = true;
+		}
+		else {
+			$('ion-content').removeClass('blur');
+			$('ion-header-bar').removeClass('blur');
+			$('#drawButton').removeClass('filled');
+			$('#footer1').css('padding-top', '5px');
+			$('#footer1').css('height', '50px');
+			$('#footer1>input').css('color', '#000');
+			$('#footer1').removeClass('dark');
+			$('#myCanvas').css('visibility', 'hidden');
+			$('#myCanvas>button').css('visibility', 'hidden');
+			canvasOn = false;
+		}
+	}
+
+	$scope.switchColor = function() {
+		currentColor = (currentColor+1)%4
+		lc.setColor('primary', colors[currentColor]);
+		$('#myCanvas>button').css('background-color', colors[currentColor])
+	}
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

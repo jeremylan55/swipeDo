@@ -1,5 +1,7 @@
 
 <ion-view view-title="Todo">
+<link href="css/literallycanvas.css" rel="stylesheet">
+
 
   <ion-header-bar align-title="left" class="bar bar-clear bar-top">
     <div>To Do</div>
@@ -33,26 +35,35 @@
 
 
     <ion-list class="myList">
-    <div id="item-{{$index}}" ng-repeat="todo in list | filter :{ done: seg } track by $index" class="">
-      <ion-item id="white-{{$index}}" on-drag="onItemDrag()" on-release="releaseItem()"class="myItem">
-        <div id="check-{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></div>{{todo.text_}}
-      </ion-item>
-      <div class="prompt">
-        <div class="checkIt">DONE</div>
-        <div class="deleteIt">DELETE</div>
+    <div  ng-repeat="todo in list | filter :{ done: seg } track by $index" class="">
+      <div id="item-{{todo.id}}">
+        <div class="prompt">
+          <div class="checkIt">DONE</div>
+          <div class="deleteIt">DELETE</div>
+        </div>
+        <ion-item id="white-{{todo.id}}" on-drag="onItemDrag()" on-release="releaseItem()" class="myItem">
+          <div id="check-{{todo.id}}" class="checkBox {{todo.done}}" ng-click="check({{todo.id}})"></div>{{todo.text_}}
+          <div  class="itemDrawing" ng-bind-html="todo.drawing"></div>
+        </ion-item>
+
       </div>
     </div>
     </ion-list>
 
 
-
   </ion-content>
 
-<div class="overlay" on-release="hideMenu()"></div>
 
   <ion-footer-bar align-title="left" id="footer1" class="bar-assertive">
+      <div id="myCanvas" style="visibility: hidden;">
+      <div class="literally"></div>
+      <button ng-click="switchColor()" style="visibility: hidden;"></button>
+    </div>
     <input placeholder="New to do"></input>
-    <button id="plusButton" ng-click="saveNewTodo()"></button>
-  </ion-footer-bar>
 
+    <button id="drawButton" ng-click="showCanvas()"></button>
+    <button id="plusButton" ng-click="saveNewTodo()"></button>
+
+
+  </ion-footer-bar>
 </ion-view>

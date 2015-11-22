@@ -3,7 +3,6 @@ button {
 	border: none;
 }
 .bar-assertive{
-	background-color: rgba(255,255,255,0.96) !important;
 	bottom: 0px !important;
 }
 .bar-header.disable-user-behavior {
@@ -36,7 +35,7 @@ button {
 }
 
 #plusButton {
-	width: 12%;
+	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	background: url(../img/plus_button.png) no-repeat;
@@ -45,8 +44,8 @@ button {
 	margin: auto;
 }
 
-#plusButton:active {
-	width: 12%;
+#plusButton.activated {
+	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	background: url(../img/plus_button_activated.png) no-repeat;
@@ -54,22 +53,47 @@ button {
 	background-position: center center;
 	margin: auto;
 }
-#hamburgerButton {
-	margin: 15px;
-	margin-right: -30px;
-	width: 25px;
-	height: 20px;
-	background:  url(../img/Hamburger.png) no-repeat;
-	background-size: 25px 20px;
+#drawButton {
+	width: 40px;
+	height: 40px;
+	background: url(../img/draw.svg) no-repeat;
+	background-size: 35px 35px;
+	background-position: center center;
+	margin: auto;
+	margin-right: 50px;
+}
+#drawButton.filled {
+	width: 40px;
+	height: 40px;
+	background: url(../img/draw_filled.svg) no-repeat;
+	background-size: 35px 35px;
+	background-position: center center;
+	margin: auto;
+	margin-right: 50px;
+}
+#drawButton.filled.activated {
+	width: 40px;
+	height: 40px;
+	background: url(../img/draw_filled_activated.svg) no-repeat;
+	background-size: 35px 35px;
+	background-position: center center;
+	margin: auto;
+	margin-right: 50px;
 }
 
-#hamburgerButton:active {
-	margin: 10px;
-	margin-right: -30px;
-	width: 30px;
-	height: 24px;
-	background:  url(../img/Hamburger_activated.png) no-repeat;
-	background-size: 30px 24px;
+#drawButton.activated {
+	width: 40px;
+	height: 40px;
+	background: url(../img/draw_activated.svg) no-repeat;
+	background-size: 35px 35px;
+	background-position: center center;
+	margin: auto;
+	margin-right: 50px;
+}
+
+#myCanvas {
+	width: 100%;
+	height: 100% !important;
 }
 
 .bar>div {
@@ -80,79 +104,16 @@ button {
 	text-align: left !important;
 }
 
-.hamburgerMenu {
-	width: 100%;
-	height: 100%;
-}
-
-.hamburgerMenu-container {
-	z-index: 30;
-	width:  180px;
-	height: 100vh;
-	background: rgba(39,39,39,1);
-	position: absolute;
-	top: 0px;
-	left: -180px;
-	overflow: auto;
-    -webkit-transition: all 0.6s; /* Safari */
-    transition: all 0.6s;
-}
-
-.hamburgerMenu-container.active {
-	z-index: 32;
-	width:  180px;
-	height: 100vh;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-    -webkit-transition: all 0.6s; /* Safari */
-    transition: all 0.6s;
-}
-.overlay {
-	visibility: hidden;
-	position: absolute;
-	z-index: 30;
-	width: 100%;
-	height: 100vh;
-	background-color: #000;
-	opacity: 0;
-    -webkit-transition: opacity 0.6s; /* Safari */
-    transition: opacity 0.6s;
-}
-
-.overlay.active {
-	visibility: visible;
-	width: 100%;
-	height: 100vh;
-	background-color: #000;
-	opacity: 0.4;
-    -webkit-transition: opacity 0.6s; /* Safari */
-    transition: opacity 0.6s;
-}
-
-.myItemHam {
-	color: #f0f0f0;
-	background: transparent !important; 
-	border: none !important;
-}
-.blur {
-	-webkit-filter: blur(5px);
-  	-moz-filter: blur(5px);
-  	-o-filter: blur(5px);
-  	-ms-filter: blur(5px);
-  	filter: blur(5px);
-    -webkit-transition: all 0.8s; /* Safari */
-    transition: all 0.8s;
-}
 
 .myItem {
 	position: relative;
 	border: none !important;
-	height: 68px;
-	max-width: 350px;
+	height: auto;
+	width: auto;
 	margin: auto;
 	border-radius: 13px;
-	margin-bottom: 13px;
+	bottom: 81px;
+	margin-bottom: -66px;
 	vertical-align: middle;
 	font-family: HelveticaNeue-Thin;
 	font-size: 24px;
@@ -164,9 +125,8 @@ button {
 	width: 350px;
 	height: 68px;
 	margin: auto;
-	margin-top: -81px;
+	margin-bottom: 4px;
 	border-radius: 13px;
-	margin-bottom: 13px;
 }
 .prompt>.checkIt {
 	opacity: 0.0;
@@ -196,7 +156,7 @@ button {
 	background-size: cover;
 	background-position: center center;
 }
-.checkBox {
+.checkBox.false {
 	background: url(../img/unchecked.png) no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -251,35 +211,17 @@ button {
 }
 
 #footer1 {
+	background-color: rgba(255,255,255,0.90) !important;
 	border-color: none !important;
 	background-image: none !important;
-	background-color: #fff !important;
+	padding-bottom: 0px !important;
+	-webkit-transition: all 0.3s; /* Safari */
+    transition: all 0.3s;
 }
-#footer2 {
-	z-index: 35;
-	visibility: hidden;
-	background-image: none !important;
-	border-color: none !important;
-	background-color: transparent !important;
-	box-shadow: none !important;
-	height: 80px !important;
-}
-#footer2>div {
-	text-align: center !important;
-	color: #DE125F;
-	height: 100%;
-	width: 73px;
-	background: url(../img/arrow_save.svg) no-repeat;
-	background-size: 73px 34px;
-	background-position: center 30px;
-}
-#footer2>#gradient {
-	box-shadow: 0px -11px 45px 26px rgba(0,0,0,0.6);
-	width: 100%;
-	height: 0px;
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
+#footer1.dark {
+	background-color: rgba(0,0,0,0.8) !important;
+	-webkit-transition: all 0.3s; /* Safari */
+    transition: all 0.3s;
 }
 
 .list {
@@ -288,8 +230,8 @@ button {
 #footer1>input {
 	position: absolute;
 	left: 10px;
-	height: 90%;
-	width: 88%;
+	height: 40px;
+	width: 65%;
 	border: none;
 	background: transparent;
 	font-size: 25px;
@@ -299,5 +241,130 @@ button {
 	position: absolute;
 	right: 10px;
 }
+.lc-picker {
+	position: absolute!important;
+	height: 94px !important;
+	width: 100% !important;
+	bottom: 0px !important;
+}
 
+div[title=Pencil] {
+	background: url(../img/pencil.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}  
 
+div[title=Pencil].selected {
+	border: none !important;
+	background: url(../img/pencil_filled.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}
+div[title=Pencil]:active {
+	background: url(../img/pencil_activated.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}  
+
+div[title=Pencil].selected:active {
+	border: none !important;
+	background: url(../img/pencil_filled_activated.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}
+div[title=Eraser] {
+	background: url(../img/eraser.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}  
+
+div[title=Eraser].selected {
+	border: none !important;
+	background: url(../img/eraser_filled.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}
+div[title=Eraser]:active {
+	background: url(../img/eraser_activated.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}  
+
+div[title=Eraser].selected:active {
+	border: none !important;
+	background: url(../img/eraser_filled_activated.png) no-repeat !important;
+	width: 51px !important;
+	height: 75px !important;
+	background-position:center top !important;
+	background-size: 48px !important;
+}
+
+.lc-undo-redo {
+	position: absolute !important;
+	bottom: 20px;
+	right: 10px;
+}
+.lc-redo {
+	display: none !important;
+}
+
+div[title=Undo] {
+	background: url(../img/Undo.svg) no-repeat !important;
+	width: 80px !important;
+	height: 40px !important;
+	background-position:left top !important;
+	background-size: 80px 40px !important;
+}  
+
+#myCanvas>button {
+	background-color: #000;
+	border-radius:  50%;
+	border: solid 4px #DE125F;
+	z-index: 20;
+	position: absolute;
+	bottom: 10px;
+	width: 40px;
+	height: 40px;
+	margin-left: -20px;
+	left: 50%;
+}
+.itemDrawing {
+	width: 100%;
+	height: auto;
+	overflow: auto;
+}
+.itemDrawing>svg {
+	position: relative;
+}
+.lc-drawing {
+	background-color: #fff !important;
+	border-radius: 10px !important;  
+	margin: auto !important;
+	width: 80vw !important;
+	height: 70vh !important;
+	margin-top: 60px !important;
+	-webkit-box-shadow: 0px 0px 23px -3px rgba(0,0,0,0.67);
+	-moz-box-shadow: 0px 0px 23px -3px rgba(0,0,0,0.67);
+	box-shadow: 0px 0px 23px -3px rgba(0,0,0,0.67);
+}
+.lc-drawing>canvas {
+	height: 100% !important;
+}
+.blur  {
+	-webkit-filter: blur(5px); /* Chrome, Safari, Opera */
+    filter: blur(5px);
+}
