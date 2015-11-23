@@ -8,6 +8,7 @@ button {
 .bar-header.disable-user-behavior {
 	background-color: transparent;
 }
+
 .bar-top {
 	border-bottom: none !important;
 	border: none !important;
@@ -113,19 +114,23 @@ button {
 	margin: auto;
 	border-radius: 13px;
 	bottom: 81px;
-	margin-bottom: -66px;
+	margin-bottom: -70px;
 	vertical-align: middle;
 	font-family: HelveticaNeue-Thin;
 	font-size: 24px;
-	/*box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.50);*/
+	background: url(../img/grip.svg) no-repeat;
+	background-position: center 10px;
+	background-size: auto 7px;
+	background-color: rgba(255,255,255,1.0) !important;
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.50);
 }
 .prompt {
 	padding: 8px;
 	padding-top: 21px;
-	width: 350px;
+	width: auto;
 	height: 68px;
 	margin: auto;
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 	border-radius: 13px;
 }
 .prompt>.checkIt {
@@ -228,6 +233,7 @@ button {
 	padding-bottom: 60px !important;
 }
 #footer1>input {
+	color: #000;
 	position: absolute;
 	left: 10px;
 	height: 40px;
@@ -330,32 +336,33 @@ div[title=Undo] {
 	background-size: 80px 40px !important;
 }  
 
-#myCanvas>button {
+#myCanvas>.switcher {
 	background-color: #000;
 	border-radius:  50%;
 	border: solid 4px #DE125F;
 	z-index: 20;
 	position: absolute;
 	bottom: 10px;
-	width: 40px;
-	height: 40px;
+	width: 40px !important;
+	height: 40px !important;
 	margin-left: -20px;
 	left: 50%;
 }
 .itemDrawing {
 	width: 100%;
-	height: auto;
-	overflow: auto;
+	max-height: auto;
 }
-.itemDrawing>svg {
+.itemDrawing>img {
 	position: relative;
+	right: 50px;
 }
+
 .lc-drawing {
 	background-color: #fff !important;
 	border-radius: 10px !important;  
 	margin: auto !important;
-	width: 80vw !important;
-	height: 70vh !important;
+	width: 95vw !important;
+	height: 80% !important;
 	margin-top: 60px !important;
 	-webkit-box-shadow: 0px 0px 23px -3px rgba(0,0,0,0.67);
 	-moz-box-shadow: 0px 0px 23px -3px rgba(0,0,0,0.67);

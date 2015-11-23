@@ -4268,7 +4268,7 @@ module.exports = Eraser = (function(_super) {
   Eraser.prototype.iconName = 'eraser';
 
   function Eraser() {
-    this.strokeWidth = 10;
+    this.strokeWidth = 20;
   }
 
   Eraser.prototype.makePoint = function(x, y, lc) {

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ti-segmented-control'])
 
-.controller('TodoCtrl', function($scope, $timeout) {
+.controller('TodoCtrl', function($scope,$rootScope, $timeout) {
 //===========================CANVAS======================================== //
 var lc = LC.init(
 	document.getElementsByClassName('literally')[0],
@@ -9,6 +9,8 @@ var lc = LC.init(
     	tools: [LC.tools.Pencil, LC.tools.Eraser]
 	}
 );
+var originalLc = lc.getSnapshot();
+
 //============================CANVAS======================================= //
 
 	function itemClass() {
@@ -19,6 +21,7 @@ var lc = LC.init(
 	}
 	$scope.keyboardHeight = 216;
 	var canvasOn = false;
+	var hasSave = true;
 	var colors = ['#000','#20E286', '#FF855A', '#2382EA'];
 	var currentColor = 0;
 window.addEventListener('native.keyboardshow', keyboardShowHandler);
@@ -32,7 +35,7 @@ function keyboardShowHandler(e){
 }
 function keyboardHideHandler(e){
 	$('#footer1').animate({marginBottom: ''}, 260, 'swing');
-}
+} 
 
 
 	$scope.seg = '';
@@ -163,25 +166,28 @@ function keyboardHideHandler(e){
 		$('#footer1').css('padding-top', '5px');
 		$('#footer1>input').css('color', '#000');
 		$('#myCanvas').css('visibility', 'hidden');
-		$('#myCanvas>button').css('visibility', 'hidden');
+		$('#myCanvas>.switcher').css('visibility', 'hidden');
 		$('#footer1').removeClass('dark');
 		canvasOn = false;
 		var text = $('#footer1>input').val();
 		if(text !='') {
 			newTodo = new itemClass();
 			newTodo.text_ = text;
-			newTodo.drawing = lc.getSVGString();
-			lc.clear();
+			if(lc.getImage() != null) {
+				newTodo.drawing = lc.getImage().toDataURL();
+			}
 			newTodo.id = $scope.list.length;
 			$scope.list.push(newTodo);
 			$timeout( function(){
 				$('#item-'+newTodo.id).addClass('animated bounceIn');
+				lc.loadSnapshot(originalLc);
 				setTimeout( function(){
-					$('#item-'+newTodo.id).removeClass()
+					$('#item-'+newTodo.id).removeClass();
 				},600);
 			},10);
 			$('#footer1>input').val('');
 			synchronize();
+			hasSave = true;
 		}
 	}
 
@@ -213,8 +219,9 @@ function keyboardHideHandler(e){
 			$('#footer1>input').css('color', '#fff');
 			$('#drawButton').addClass('filled');
 			$('#myCanvas').css('visibility', 'visible');
-			$('#myCanvas>button').css('visibility', 'visible');
+			$('#myCanvas>.switcher').css('visibility', 'visible');
 			canvasOn = true;
+
 		}
 		else {
 			$('ion-content').removeClass('blur');
@@ -225,7 +232,7 @@ function keyboardHideHandler(e){
 			$('#footer1>input').css('color', '#000');
 			$('#footer1').removeClass('dark');
 			$('#myCanvas').css('visibility', 'hidden');
-			$('#myCanvas>button').css('visibility', 'hidden');
+			$('#myCanvas>.switcher').css('visibility', 'hidden');
 			canvasOn = false;
 		}
 	}
@@ -233,10 +240,19 @@ function keyboardHideHandler(e){
 	$scope.switchColor = function() {
 		currentColor = (currentColor+1)%4
 		lc.setColor('primary', colors[currentColor]);
-		$('#myCanvas>button').css('background-color', colors[currentColor])
+		$('#myCanvas>.switcher').css('background-color', colors[currentColor])
 	}
 
-});
+	$rootScope.image = '';
+	$scope.getIndex = function(drawing) {
+		$rootScope.image = drawing;
+	}
+
+})
+
+.controller('detailCtrl', function($scope, $rootScope) {
+})
+;
 
 
 

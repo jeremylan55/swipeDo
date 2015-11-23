@@ -1,10 +1,9 @@
 
-<ion-view view-title="Todo">
-<link href="css/literallycanvas.css" rel="stylesheet">
+<ion-view view-title="Scribes">
 
 
   <ion-header-bar align-title="left" class="bar bar-clear bar-top">
-    <div>To Do</div>
+    <div>Scribes</div>
   </ion-header-bar>  
 
   <ion-header-bar class="bar-subheader bar">
@@ -20,22 +19,10 @@
 
 
 
-<!-- <ion-slide-box on-slide-changed="slideHasChanged($index)">
-  <ion-slide ng-repeat="list in all_list">
-    <ion-list class="myList">
-        List Name:
-        {{list.name_}}
-      <ion-item id="item{{$index}}" on-drag="onItemDrag()" on-release="releaseItem() "class="myItem" ng-repeat="todo in list.list">
-        <button id="check{{$index}}" class="checkBox {{todo.done}}" ng-click="check({{$index}})"></button>{{todo.text_}}
-      </ion-item>
-    </ion-list>
-  <ion-slide>
-</ion-slide-box>
- -->
 
 
     <ion-list class="myList">
-    <div  ng-repeat="todo in list | filter :{ done: seg } track by $index" class="">
+    <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="todo in list | filter :{ done: seg } track by $index" class="">
       <div id="item-{{todo.id}}">
         <div class="prompt">
           <div class="checkIt">DONE</div>
@@ -43,9 +30,12 @@
         </div>
         <ion-item id="white-{{todo.id}}" on-drag="onItemDrag()" on-release="releaseItem()" class="myItem">
           <div id="check-{{todo.id}}" class="checkBox {{todo.done}}" ng-click="check({{todo.id}})"></div>{{todo.text_}}
-          <div  class="itemDrawing" ng-bind-html="todo.drawing"></div>
+          <div class="itemDrawing">
+          <a ng-href="#/tab/detail" ng-click="getIndex('{{todo.drawing}}')">
+            <img src="{{todo.drawing}}">
+          </a>
+          </div>
         </ion-item>
-
       </div>
     </div>
     </ion-list>
@@ -57,9 +47,9 @@
   <ion-footer-bar align-title="left" id="footer1" class="bar-assertive">
       <div id="myCanvas" style="visibility: hidden;">
       <div class="literally"></div>
-      <button ng-click="switchColor()" style="visibility: hidden;"></button>
+      <div class="switcher" ng-click="switchColor()" style="visibility: hidden;"></div>
     </div>
-    <input placeholder="New to do"></input>
+    <input placeholder="New scribe"></input>
 
     <button id="drawButton" ng-click="showCanvas()"></button>
     <button id="plusButton" ng-click="saveNewTodo()"></button>
